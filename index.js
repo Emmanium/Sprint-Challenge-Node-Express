@@ -11,11 +11,39 @@ const PORT = 3000;
 
 //middleware
 server.use(
+  express.json(),
   helmet(),
   morgan('tiny')
 );
 
 //routing
+server.get('/api/projects', (req, res) => {
+  projects.get()
+    .then(array => {
+      res.json(array)
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({error: "Error with database"})
+    })
+})
+
+server.get('/api/projects/:id', (req, res) => {
+  
+})
+
+server.post('/api/projects', (req, res) => {
+  
+})
+
+server.delete('/api/projects/:id', (req, res) => {
+  
+})
+
+server.put('/api/projects/:id', (req, res) => {
+  
+})
 
 //server listen
 server.listen(PORT, (req, res) => {
