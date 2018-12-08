@@ -39,7 +39,7 @@ router.get('/actions/:project_id', (req, res) => {
   const { project_id } = req.params;
   projects.getProjectActions(project_id)
     .then(actions => {
-      if (actions.length < 0) {
+      if (actions.length > 0) {
         res.json(actions)
       } else {
         res
