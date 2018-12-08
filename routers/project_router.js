@@ -20,18 +20,12 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
   projects.get(id)
     .then(project => {
-      if (project) {
         res.json(project)
-      } else {
-        res
-          .status(404)
-          .json({ message: "Invalid ID" })
-      }
     })
     .catch(err => {
       res
         .status(500)
-        .json({ error: "Error with database" })
+        .json({ error: "The project doesn't exist" })
     })
 })
 
