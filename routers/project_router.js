@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 projects = require('../data/helpers/projectModel');
+actions = require('../data/helpers/actionModel');
 
 router.get('/', (req, res) => {
   projects.get()
@@ -25,6 +26,25 @@ router.get('/:id', (req, res) => {
         res
           .status(404)
           .json({ message: "Invalid ID" })
+      }
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: "Error with database" })
+    })
+})
+
+router.get('/actions/:project_id', (req, res) => {
+  const { project_id } = req.params;
+  projects.getProjectActions(project_id)
+    .then(actions => {
+      if (actions.length < 0) {
+        res.json(actions)
+      } else {
+        res
+          .status(404)
+          .json({ message: "Invalid project ID" })
       }
     })
     .catch(err => {
